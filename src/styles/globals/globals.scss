@@ -5,6 +5,11 @@
 @import "typography.scss";
 @import "bootstrap3Grids.scss";
 
+// tailwindcss
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
 	margin: 0;
 	@extend .text_reg;
