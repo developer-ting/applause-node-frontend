@@ -30,7 +30,9 @@ export default function ContactPage() {
 			{/* Page Content starts here */}
 			<main className={styles.ContactPage}>
 				<div className="container">
-					<h2>This is contact page</h2>
+					<div className="">
+						<h2>This is contact page</h2>
+					</div>
 				</div>
 			</main>
 			{/* Page Content ends here */}
