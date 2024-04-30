@@ -63,6 +63,10 @@ export default function ContainerLayout({ children }) {
 		{ text: "Front Users", icon: <User className="h-4 w-4" /> },
 	];
 
+	if (pageInfo === "/login") {
+		return <>{children}</>;
+	}
+
 	return (
 		<div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
 			<div className="hidden border-r bg-muted/40 md:block">
