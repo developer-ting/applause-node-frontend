@@ -11,6 +11,12 @@ import {
 	Search,
 	ShoppingCart,
 	Users,
+	Film,
+	Popcorn,
+	Dumbbell,
+	User,
+	Projector,
+	Camera,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -33,8 +39,30 @@ import {
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
+import { usePathname, useSearchParams } from "next/navigation";
+
 /** */
-export default function Dashboard() {
+export default function ContainerLayout({ children }) {
+	const pageInfo = usePathname();
+
+	/** Active page index */
+	const activePage = () => {
+		if (pageInfo === "/") {
+			return 0;
+		}
+	};
+
+	const pageList = [
+		{ text: "Dashboard", icon: <Home className="h-4 w-4" /> },
+		{ text: "Genre", icon: <Film className="h-4 w-4" /> },
+		{ text: "Platform", icon: <Popcorn className="h-4 w-4" /> },
+		{ text: "Skills", icon: <Dumbbell className="h-4 w-4" /> },
+		{ text: "Actors", icon: <Users className="h-4 w-4" /> },
+		{ text: "Projects", icon: <Projector className="h-4 w-4" /> },
+		{ text: "Media", icon: <Camera className="h-4 w-4" /> },
+		{ text: "Front Users", icon: <User className="h-4 w-4" /> },
+	];
+
 	return (
 		<div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
 			<div className="hidden border-r bg-muted/40 md:block">
@@ -51,44 +79,20 @@ export default function Dashboard() {
 					</div>
 					<div className="flex-1">
 						<nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-							<Link
-								href="#"
-								className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-							>
-								<Home className="h-4 w-4" />
-								Dashboard
-							</Link>
-							<Link
-								href="#"
-								className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-							>
-								<ShoppingCart className="h-4 w-4" />
-								Orders
-								<Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-									6
-								</Badge>
-							</Link>
-							<Link
-								href="#"
-								className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-							>
-								<Package className="h-4 w-4" />
-								Products{" "}
-							</Link>
-							<Link
-								href="#"
-								className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-							>
-								<Users className="h-4 w-4" />
-								Customers
-							</Link>
-							<Link
-								href="#"
-								className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-							>
-								<LineChart className="h-4 w-4" />
-								Analytics
-							</Link>
+							{pageList.map((item, ind) => {
+								return (
+									<Link
+										key={item.text}
+										href="#"
+										className={`${
+											activePage() === ind && "bg-muted"
+										} flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary`}
+									>
+										{item.icon}
+										{item.text}
+									</Link>
+								);
+							})}
 						</nav>
 					</div>
 					<div className="mt-auto p-4">
@@ -119,51 +123,20 @@ export default function Dashboard() {
 						</SheetTrigger>
 						<SheetContent side="left" className="flex flex-col">
 							<nav className="grid gap-2 text-lg font-medium">
-								<Link
-									href="#"
-									className="flex items-center gap-2 text-lg font-semibold"
-								>
-									<Package2 className="h-6 w-6" />
-									<span className="sr-only">Acme Inc</span>
-								</Link>
-								<Link
-									href="#"
-									className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-								>
-									<Home className="h-5 w-5" />
-									Dashboard
-								</Link>
-								<Link
-									href="#"
-									className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
-								>
-									<ShoppingCart className="h-5 w-5" />
-									Orders
-									<Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-										6
-									</Badge>
-								</Link>
-								<Link
-									href="#"
-									className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-								>
-									<Package className="h-5 w-5" />
-									Products
-								</Link>
-								<Link
-									href="#"
-									className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-								>
-									<Users className="h-5 w-5" />
-									Customers
-								</Link>
-								<Link
-									href="#"
-									className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-								>
-									<LineChart className="h-5 w-5" />
-									Analytics
-								</Link>
+								{pageList.map((item, ind) => {
+									return (
+										<Link
+											key={item.text}
+											href="#"
+											className={`${
+												activePage() === ind && "bg-muted"
+											} mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-foreground hover:text-foreground`}
+										>
+											{item.icon}
+											{item.text}
+										</Link>
+									);
+								})}
 							</nav>
 							<div className="mt-auto">
 								<Card>
@@ -211,25 +184,7 @@ export default function Dashboard() {
 						</DropdownMenuContent>
 					</DropdownMenu>
 				</header>
-				<main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-					<div className="flex items-center">
-						<h1 className="text-lg font-semibold md:text-2xl">Inventory</h1>
-					</div>
-					<div
-						className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
-						x-chunk="dashboard-02-chunk-1"
-					>
-						<div className="flex flex-col items-center gap-1 text-center">
-							<h3 className="text-2xl font-bold tracking-tight">
-								You have no products
-							</h3>
-							<p className="text-sm text-muted-foreground">
-								You can start selling as soon as you add a product.
-							</p>
-							<Button className="mt-4">Add Product</Button>
-						</div>
-					</div>
-				</main>
+				{children}
 			</div>
 		</div>
 	);
