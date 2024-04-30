@@ -12,17 +12,24 @@
 		"create-page": "node scripts/createPage.js"
 	},
 	"dependencies": {
+		"@radix-ui/react-label": "^2.0.2",
+		"@radix-ui/react-slot": "^1.0.2",
 		"@studio-freight/lenis": "^1.0.22",
+		"class-variance-authority": "^0.7.0",
+		"clsx": "^2.1.1",
 		"commander": "^11.1.0",
 		"fs-extra": "^11.2.0",
 		"html-react-parser": "^5.0.6",
+		"lucide-react": "^0.376.0",
 		"next": "^14.2.3",
 		"path": "^0.12.7",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"react-hook-form": "^7.45.4",
 		"resend": "^2.0.0",
-		"sass": "^1.54.9"
+		"sass": "^1.54.9",
+		"tailwind-merge": "^2.3.0",
+		"tailwindcss-animate": "^1.0.7"
 	},
 	"devDependencies": {
 		"@types/node": "^20.10.5",

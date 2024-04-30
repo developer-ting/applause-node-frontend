@@ -11,6 +11,7 @@ import SmoothScrolling from "@/utils/SmoothScrolling";
 
 // STYLES //
 import "@/styles/globals/globals.scss";
+import "./globals.css";
 
 // IMAGES //
 
