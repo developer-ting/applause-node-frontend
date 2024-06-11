@@ -39,7 +39,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 /** */
 export default function ContainerLayout({ children }) {
@@ -50,6 +50,9 @@ export default function ContainerLayout({ children }) {
 		if (pageInfo === "/") {
 			return 0;
 		}
+		return pageList.findIndex((item) =>
+			pageInfo.includes(item.text.toLowerCase())
+		);
 	};
 
 	const pageList = [
@@ -60,7 +63,7 @@ export default function ContainerLayout({ children }) {
 		{ text: "Actors", icon: <Users className="h-4 w-4" /> },
 		{ text: "Projects", icon: <Projector className="h-4 w-4" /> },
 		{ text: "Media", icon: <Camera className="h-4 w-4" /> },
-		{ text: "Front Users", icon: <User className="h-4 w-4" /> },
+		{ text: "Users", icon: <User className="h-4 w-4" /> },
 	];
 
 	if (pageInfo === "/login") {
@@ -74,7 +77,7 @@ export default function ContainerLayout({ children }) {
 					<div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
 						<Link href="/" className="flex items-center gap-2 font-semibold">
 							<Package2 className="h-6 w-6" />
-							<span className="">Acme Inc</span>
+							<span className="">Applause</span>
 						</Link>
 						<Button variant="outline" size="icon" className="ml-auto h-8 w-8">
 							<Bell className="h-4 w-4" />
@@ -89,7 +92,7 @@ export default function ContainerLayout({ children }) {
 										key={item.text}
 										href="#"
 										className={`${
-											activePage() === ind && "bg-muted"
+											activePage() === ind && "bg-muted text-primary"
 										} flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary`}
 									>
 										{item.icon}
