@@ -90,7 +90,7 @@ export default function ContainerLayout({ children }) {
 								return (
 									<Link
 										key={item.text}
-										href="#"
+										href={`/${item.text.toLowerCase()}`}
 										className={`${
 											activePage() === ind && "bg-muted text-primary"
 										} flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary`}
@@ -101,21 +101,6 @@ export default function ContainerLayout({ children }) {
 								);
 							})}
 						</nav>
-					</div>
-					<div className="mt-auto p-4">
-						<Card x-chunk="dashboard-02-chunk-0">
-							<CardHeader className="p-2 pt-0 md:p-4">
-								<CardTitle>Upgrade to Pro</CardTitle>
-								<CardDescription>
-									Unlock all features and get unlimited access to our support team.
-								</CardDescription>
-							</CardHeader>
-							<CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-								<Button size="sm" className="w-full">
-									Upgrade
-								</Button>
-							</CardContent>
-						</Card>
 					</div>
 				</div>
 			</div>
@@ -134,7 +119,7 @@ export default function ContainerLayout({ children }) {
 									return (
 										<Link
 											key={item.text}
-											href="#"
+											href={`/${item.text.toLowerCase()}`}
 											className={`${
 												activePage() === ind && "bg-muted"
 											} mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-foreground hover:text-foreground`}
@@ -145,21 +130,6 @@ export default function ContainerLayout({ children }) {
 									);
 								})}
 							</nav>
-							<div className="mt-auto">
-								<Card>
-									<CardHeader>
-										<CardTitle>Upgrade to Pro</CardTitle>
-										<CardDescription>
-											Unlock all features and get unlimited access to our support team.
-										</CardDescription>
-									</CardHeader>
-									<CardContent>
-										<Button size="sm" className="w-full">
-											Upgrade
-										</Button>
-									</CardContent>
-								</Card>
-							</div>
 						</SheetContent>
 					</Sheet>
 					<div className="w-full flex-1">

@@ -53,30 +53,12 @@ import ProfileImg from "/public/img/users/profile_pic.png";
 // DATA //
 
 /** Users Container */
-export default function MediaContainer() {
-	return (
-		<Tabs defaultValue="images" className="w-full">
-			<TabsList>
-				<TabsTrigger value="images">Image</TabsTrigger>
-				<TabsTrigger value="videos">Videos</TabsTrigger>
-			</TabsList>
-			<TabsContent value="images">
-				<Images />
-			</TabsContent>
-			<TabsContent value="videos">
-				<Images />
-			</TabsContent>
-		</Tabs>
-	);
-}
-
-/** */
-const Images = () => {
+export default function ProjectsContainer() {
 	return (
 		<Card>
 			<CardHeader>
-				<CardTitle>Media</CardTitle>
-				<CardDescription>Manage your medias.</CardDescription>
+				<CardTitle>Projects</CardTitle>
+				<CardDescription>Manage your projects.</CardDescription>
 			</CardHeader>
 			<CardContent>
 				<Table>
@@ -85,7 +67,7 @@ const Images = () => {
 							<TableHead className="hidden w-[100px] sm:table-cell">
 								<span className="sr-only">Image</span>
 							</TableHead>
-							<TableHead>Path</TableHead>
+							<TableHead>Name</TableHead>
 							{/* <TableHead>Status</TableHead> */}
 							{/* <TableHead className="hidden md:table-cell">Price</TableHead> */}
 							{/* <TableHead className="hidden md:table-cell">Total Sales</TableHead> */}
@@ -96,40 +78,11 @@ const Images = () => {
 						</TableRow>
 					</TableHeader>
 					<TableBody>
-						<TableRow>
-							<TableCell className="hidden sm:table-cell">
-								<Image
-									alt="Product image"
-									className="aspect-square rounded-md object-cover"
-									height="64"
-									src={ProfileImg}
-									width="64"
-								/>
-							</TableCell>
-							<TableCell className="font-medium">images/652e6a1c4de33.jpg</TableCell>
-							{/* <TableCell>
-					<Badge variant="outline">Draft</Badge>
-				</TableCell> */}
-							{/* <TableCell className="hidden md:table-cell">$499.99</TableCell> */}
-							{/* <TableCell className="hidden md:table-cell">25</TableCell> */}
-							<TableCell className="hidden md:table-cell">
-								2023-07-12 10:42 AM
-							</TableCell>
-							<TableCell>
-								<DropdownMenu>
-									<DropdownMenuTrigger asChild>
-										<Button aria-haspopup="true" size="icon" variant="ghost">
-											<MoreHorizontal className="h-4 w-4" />
-											<span className="sr-only">Toggle menu</span>
-										</Button>
-									</DropdownMenuTrigger>
-									<DropdownMenuContent align="end">
-										<DropdownMenuLabel>Actions</DropdownMenuLabel>
-										<DropdownMenuItem>Delete</DropdownMenuItem>
-									</DropdownMenuContent>
-								</DropdownMenu>
-							</TableCell>
-						</TableRow>
+						<Project />
+						<Project />
+						<Project />
+						<Project />
+						<Project />
 					</TableBody>
 				</Table>
 			</CardContent>
@@ -160,5 +113,44 @@ const Images = () => {
 				</Pagination>
 			</CardFooter>
 		</Card>
+	);
+}
+
+/** */
+const Project = () => {
+	return (
+		<TableRow>
+			<TableCell className="hidden sm:table-cell">
+				<Image
+					alt="Product image"
+					className="aspect-square rounded-md object-cover"
+					height="64"
+					src={ProfileImg}
+					width="64"
+				/>
+			</TableCell>
+			<TableCell className="font-medium">Criminial</TableCell>
+			{/* <TableCell>
+					<Badge variant="outline">Draft</Badge>
+				</TableCell> */}
+			{/* <TableCell className="hidden md:table-cell">$499.99</TableCell> */}
+			{/* <TableCell className="hidden md:table-cell">25</TableCell> */}
+			<TableCell className="hidden md:table-cell">2023-07-12 10:42 AM</TableCell>
+			<TableCell>
+				<DropdownMenu>
+					<DropdownMenuTrigger asChild>
+						<Button aria-haspopup="true" size="icon" variant="ghost">
+							<MoreHorizontal className="h-4 w-4" />
+							<span className="sr-only">Toggle menu</span>
+						</Button>
+					</DropdownMenuTrigger>
+					<DropdownMenuContent align="end">
+						<DropdownMenuLabel>Actions</DropdownMenuLabel>
+						<DropdownMenuItem>Edit</DropdownMenuItem>
+						<DropdownMenuItem>Delete</DropdownMenuItem>
+					</DropdownMenuContent>
+				</DropdownMenu>
+			</TableCell>
+		</TableRow>
 	);
 };

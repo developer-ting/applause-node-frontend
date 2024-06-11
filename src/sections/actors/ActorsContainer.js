@@ -7,7 +7,6 @@ import Image from "next/image";
 
 // PLUGINS //
 import { MoreHorizontal } from "lucide-react";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -48,71 +47,40 @@ import {
 // UTILS //
 
 // IMAGES //
-import ProfileImg from "/public/img/users/profile_pic.png";
 
 // DATA //
 
-/** Users Container */
-export default function UsersContainer() {
+/** Actors Container */
+export default function ActorsContainer() {
 	return (
 		<Card>
 			<CardHeader>
-				<CardTitle>Front Users</CardTitle>
-				<CardDescription>Manage your users.</CardDescription>
+				<CardTitle>Actors</CardTitle>
+				<CardDescription>Manage your actors.</CardDescription>
 			</CardHeader>
 			<CardContent>
 				<Table>
 					<TableHeader>
 						<TableRow>
-							<TableHead className="hidden w-[100px] sm:table-cell">
+							{/* <TableHead className="hidden w-[100px] sm:table-cell">
 								<span className="sr-only">Image</span>
-							</TableHead>
+							</TableHead> */}
 							<TableHead>Name</TableHead>
-							<TableHead>Status</TableHead>
+							{/* <TableHead>Status</TableHead> */}
 							{/* <TableHead className="hidden md:table-cell">Price</TableHead> */}
 							{/* <TableHead className="hidden md:table-cell">Total Sales</TableHead> */}
-							<TableHead className="hidden md:table-cell">Created at</TableHead>
+							<TableHead>Created at</TableHead>
 							<TableHead>
-								<span className="sr-only">Actions</span>
+								<span>Actions</span>
 							</TableHead>
 						</TableRow>
 					</TableHeader>
 					<TableBody>
-						<TableRow>
-							<TableCell className="hidden sm:table-cell">
-								<Image
-									alt="Product image"
-									className="aspect-square rounded-md object-cover"
-									height="64"
-									src={ProfileImg}
-									width="64"
-								/>
-							</TableCell>
-							<TableCell className="font-medium">Laser Lemonade Machine</TableCell>
-							<TableCell>
-								<Badge variant="outline">Draft</Badge>
-							</TableCell>
-							{/* <TableCell className="hidden md:table-cell">$499.99</TableCell> */}
-							{/* <TableCell className="hidden md:table-cell">25</TableCell> */}
-							<TableCell className="hidden md:table-cell">
-								2023-07-12 10:42 AM
-							</TableCell>
-							<TableCell>
-								<DropdownMenu>
-									<DropdownMenuTrigger asChild>
-										<Button aria-haspopup="true" size="icon" variant="ghost">
-											<MoreHorizontal className="h-4 w-4" />
-											<span className="sr-only">Toggle menu</span>
-										</Button>
-									</DropdownMenuTrigger>
-									<DropdownMenuContent align="end">
-										<DropdownMenuLabel>Actions</DropdownMenuLabel>
-										<DropdownMenuItem>Edit</DropdownMenuItem>
-										<DropdownMenuItem>Delete</DropdownMenuItem>
-									</DropdownMenuContent>
-								</DropdownMenu>
-							</TableCell>
-						</TableRow>
+						<Actor />
+						<Actor />
+						<Actor />
+						<Actor />
+						<Actor />
 					</TableBody>
 				</Table>
 			</CardContent>
@@ -145,3 +113,42 @@ export default function UsersContainer() {
 		</Card>
 	);
 }
+
+/** */
+const Actor = () => {
+	return (
+		<TableRow>
+			{/* <TableCell className="hidden sm:table-cell">
+				<Image
+					alt="Product image"
+					className="aspect-square rounded-md object-cover"
+					height="64"
+					src={ProfileImg}
+					width="64"
+				/>
+			</TableCell> */}
+			<TableCell className="font-medium">Criminial</TableCell>
+			{/* <TableCell>
+					<Badge variant="outline">Draft</Badge>
+				</TableCell> */}
+			{/* <TableCell className="hidden md:table-cell">$499.99</TableCell> */}
+			{/* <TableCell className="hidden md:table-cell">25</TableCell> */}
+			<TableCell className="hidden md:table-cell">2023-07-12 10:42 AM</TableCell>
+			<TableCell>
+				<DropdownMenu>
+					<DropdownMenuTrigger asChild>
+						<Button aria-haspopup="true" size="icon" variant="ghost">
+							<MoreHorizontal className="h-4 w-4" />
+							<span className="sr-only">Toggle menu</span>
+						</Button>
+					</DropdownMenuTrigger>
+					<DropdownMenuContent align="end">
+						<DropdownMenuLabel>Actions</DropdownMenuLabel>
+						<DropdownMenuItem>Edit</DropdownMenuItem>
+						<DropdownMenuItem>Delete</DropdownMenuItem>
+					</DropdownMenuContent>
+				</DropdownMenu>
+			</TableCell>
+		</TableRow>
+	);
+};
