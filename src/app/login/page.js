@@ -18,7 +18,7 @@ import styles from "@/styles/pages/Contact.module.scss";
 // DATA //
 
 /** Contact Page */
-export default function ContactPage() {
+export default async function ContactPage() {
 	return (
 		<div>
 			<MetaTags Title={"Contact"} Desc={""} OgImg={""} Url={"/contact"} />
