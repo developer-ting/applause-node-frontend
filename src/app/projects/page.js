@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Link from "next/link";
 
 // STYLES //
 
@@ -34,12 +35,14 @@ export default function Page() {
 						<Label htmlFor="email">Search</Label>
 						<Input type="text" id="search" placeholder="" />
 					</div>
-					<Button size="sm" className="h-8 gap-1">
-						<PlusCircle className="h-3.5 w-3.5" />
-						<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-							Add Project
-						</span>
-					</Button>
+					<Link href="/projects/create">
+						<Button size="sm" className="h-8 gap-1">
+							<PlusCircle className="h-3.5 w-3.5" />
+							<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+								Add Project
+							</span>
+						</Button>
+					</Link>
 				</div>
 				<ProjectsContainer />
 			</main>
