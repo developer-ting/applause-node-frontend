@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ContactForm from "@/sections/ContactForm";
 import MetaTags from "@/components/MetaTags";
+import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 
 // SECTIONS //
 
@@ -20,7 +22,11 @@ import styles from "@/styles/pages/Contact.module.scss";
 // DATA //
 
 /** Contact Page */
-export default function ContactPage() {
+export default async function ContactPage() {
+	const session = await auth();
+	if (!session) {
+		redirect("/login");
+	}
 	return (
 		<div>
 			<MetaTags Title={"Contact"} Desc={""} OgImg={""} Url={"/contact"} />

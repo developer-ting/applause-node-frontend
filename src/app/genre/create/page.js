@@ -2,6 +2,8 @@
 
 // COMPONENTS //
 import MetaTags from "@/components/MetaTags";
+import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 
 // SECTIONS //
 

@@ -3,6 +3,8 @@
 // COMPONENTS //
 import MetaTags from "@/components/MetaTags";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 
 // SECTIONS //
 import PlatformContainer from "@/sections/platform/PlatformContainer";
@@ -19,7 +21,11 @@ import { PlusCircle } from "lucide-react";
 // DATA //
 
 /** Contact Page */
-export default function Page() {
+export default async function Page() {
+	const session = await auth();
+	if (!session) {
+		redirect("/login");
+	}
 	return (
 		<div>
 			<MetaTags Title={"Contact"} Desc={""} OgImg={""} Url={"/contact"} />

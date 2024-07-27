@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/components/ui/use-toast";
 import userSignIn from "@/utils/UserSignIn";
+import { redirect } from "next/navigation";
 
 /** Login form */
 export default function LoginForm() {
@@ -39,6 +40,8 @@ export default function LoginForm() {
 			title: "Logged",
 			description: "Login Successsful...!",
 		});
+
+		redirect("/");
 	};
 
 	return (

@@ -2,6 +2,8 @@
 
 // COMPONENTS //
 import MetaTags from "@/components/MetaTags";
+import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 
 // SECTIONS //
 import MediaContainer from "@/sections/media/MediaContainer";
@@ -21,7 +23,11 @@ import { Label } from "@/components/ui/label";
 // DATA //
 
 /** Contact Page */
-export default function Page() {
+export default async function Page() {
+	const session = await auth();
+	if (!session) {
+		redirect("/login");
+	}
 	return (
 		<div>
 			<MetaTags Title={"Contact"} Desc={""} OgImg={""} Url={"/contact"} />
