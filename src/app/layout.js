@@ -6,9 +6,11 @@ import ContainerLayout from "@/components/ContainerLayout";
 // SECTIONS //
 
 // PLUGINS //
+import { SessionProvider } from "next-auth/react";
 
 // UTILS //
 import SmoothScrolling from "@/utils/SmoothScrolling";
+import { auth } from "@/auth";
 
 // STYLES //
 import "@/styles/globals/globals.scss";
@@ -25,10 +27,13 @@ export const metadata = {
 
 /** Layout */
 export default async function RootLayout({ children }) {
+	const session = await auth();
 	return (
 		<html lang="en">
 			<body>
-				<ContainerLayout>{children}</ContainerLayout>
+				<SessionProvider session={session}>
+					<ContainerLayout>{children}</ContainerLayout>
+				</SessionProvider>
 			</body>
 		</html>
 	);

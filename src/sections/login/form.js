@@ -41,7 +41,7 @@ export default function LoginForm() {
 			description: "Login Successsful...!",
 		});
 
-		redirect("/");
+		window.location.reload();
 	};
 
 	return (

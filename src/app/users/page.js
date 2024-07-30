@@ -19,12 +19,17 @@ import { PlusCircle } from "lucide-react";
 
 // DATA //
 
+// SERVICES //
+import { getAllUsers } from "@/services/Users.service";
+
 /** Contact Page */
 export default async function Page() {
 	const session = await auth();
 	if (!session) {
 		redirect("/login");
 	}
+	const users = await getAllUsers({ token: session.user.token });
+	console.log(users);
 
 	return (
 		<div>
@@ -41,7 +46,7 @@ export default async function Page() {
 						</span>
 					</Button>
 				</div>
-				<UsersContainer />
+				<UsersContainer users={users} />
 			</main>
 			{/* Page Content ends here */}
 		</div>

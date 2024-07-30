@@ -38,11 +38,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-
+import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+import { auth } from "@/auth";
+import { signOut } from "next-auth/react";
 
 /** */
 export default function ContainerLayout({ children }) {
+	const session = useSession();
 	const pageInfo = usePathname();
 
 	/** Active page index */
@@ -152,12 +156,17 @@ export default function ContainerLayout({ children }) {
 							</Button>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent align="end">
-							<DropdownMenuLabel>My Account</DropdownMenuLabel>
+							{session.data && (
+								<DropdownMenuLabel>{session.data.user.email}</DropdownMenuLabel>
+							)}
 							<DropdownMenuSeparator />
 							<DropdownMenuItem>Settings</DropdownMenuItem>
 							<DropdownMenuItem>Support</DropdownMenuItem>
 							<DropdownMenuSeparator />
-							<DropdownMenuItem>Logout</DropdownMenuItem>
+							{session.data && (
+								<DropdownMenuItem onClick={() => signOut()}>Logout</DropdownMenuItem>
+							)}
+							{!session.data && <DropdownMenuItem>Login</DropdownMenuItem>}
 						</DropdownMenuContent>
 					</DropdownMenu>
 				</header>
