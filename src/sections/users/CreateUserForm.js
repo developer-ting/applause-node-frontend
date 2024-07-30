@@ -3,9 +3,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { postUser } from "@/services/Users.service";
 import { useForm } from "react-hook-form";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useState } from "react";
+import Image from "next/image";
+import Cam from "/public/img/icons/cam.png";
 
 /** Create User Form */
-const CreateUserForm = () => {
+const CreateUserForm = ({ data }) => {
+	const [thumb, setThumb] = useState(data?.profile);
 	const {
 		register,
 		handleSubmit,
@@ -14,17 +19,18 @@ const CreateUserForm = () => {
 	} = useForm();
 
 	/** */
-	const onSubmit = async (data) => {
+	const onSubmit = async (formObj) => {
 		const formdata = new FormData();
-		formdata.append("firstname", data.firstname);
-		formdata.append("lastname", data.lastname);
-		formdata.append("email", data.email);
-		formdata.append("password", data.password);
-		formdata.append("profile", data.profile[0]);
+		formdata.append("firstname", formObj.firstname);
+		formdata.append("lastname", formObj.lastname);
+		formdata.append("email", formObj.email);
+		formdata.append("password", formObj.password);
+		formdata.append("profile", formObj.profile[0]);
 
 		await postUser({ formdata: formdata });
-		console.log("asd", data);
 	};
+
+	console.log(data);
 
 	return (
 		<div className="relative flex-col items-start gap-8 md:flex">
@@ -41,6 +47,7 @@ const CreateUserForm = () => {
 							id="firstname"
 							type="text"
 							placeholder="First"
+							defaultValue={data?.firstname || "First"}
 							{...register("firstname", {
 								required: { value: true, message: "This field is required" },
 							})}
@@ -55,6 +62,7 @@ const CreateUserForm = () => {
 							id="lastname"
 							type="text"
 							placeholder="Last"
+							defaultValue={data?.lastname || "Last"}
 							{...register("lastname", {
 								required: { value: true, message: "This field is required" },
 							})}
@@ -69,6 +77,7 @@ const CreateUserForm = () => {
 							id="email"
 							type="email"
 							placeholder="email@gmail.com"
+							defaultValue={data?.email || "email@gmail.com"}
 							{...register("email", {
 								required: { value: true, message: "This field is required" },
 								pattern: {
@@ -86,7 +95,7 @@ const CreateUserForm = () => {
 						<Input
 							id="password"
 							type="password"
-							placeholder="BZvRJDbmmKF8Gy7"
+							placeholder="password"
 							{...register("password", {
 								required: { value: true, message: "This field is required" },
 							})}
@@ -100,14 +109,28 @@ const CreateUserForm = () => {
 					<legend className="-ml-1 px-1 text-sm font-medium">Thumbnail</legend>
 
 					<div className="grid gap-2">
-						<div className="grid grid-cols-3 gap-2">
+						<div className="flex items-center gap-2">
 							<Input
 								id="picture"
+								name="picture"
 								type="file"
+								className="hidden"
 								{...register("profile", {
 									required: { value: true, message: "This field is required" },
+									onChange: (e) => setThumb(URL.createObjectURL(e.target.files[0])),
 								})}
 							/>
+							<Label htmlFor="picture" className="cursor-pointer relative group">
+								<Avatar className="w-[150px] h-[150px] group-hover:opacity-[0.5] transition-all">
+									<AvatarImage className="object-cover" src={thumb} />
+									<AvatarFallback>Thumb</AvatarFallback>
+								</Avatar>
+								<Image
+									alt="cam"
+									src={Cam}
+									className="pointer-events-none transition-all opacity-0 w-[40px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] group-hover:opacity-[1]"
+								/>
+							</Label>
 						</div>
 						{errors.profile && (
 							<p className="text-sm text-red-600">{errors.profile.message}</p>
