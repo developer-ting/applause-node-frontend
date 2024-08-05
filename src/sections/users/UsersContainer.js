@@ -49,6 +49,7 @@ import {
 
 // IMAGES //
 import ProfileImg from "/public/img/users/profile_pic.png";
+import Link from "next/link";
 
 // DATA //
 
@@ -111,7 +112,9 @@ export default function UsersContainer({ users }) {
 											</DropdownMenuTrigger>
 											<DropdownMenuContent align="end">
 												<DropdownMenuLabel>Actions</DropdownMenuLabel>
-												<DropdownMenuItem>Edit</DropdownMenuItem>
+												<Link href={`/users/${item.email}`}>
+													<DropdownMenuItem>Edit</DropdownMenuItem>
+												</Link>
 												<DropdownMenuItem>Delete</DropdownMenuItem>
 											</DropdownMenuContent>
 										</DropdownMenu>
