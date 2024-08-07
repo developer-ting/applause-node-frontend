@@ -8,8 +8,8 @@ export async function getAllUsers({ token }) {
 }
 
 /** get single Users */
-export async function getSingleUser({ token }) {
-	const res = await fetch(`${process.env.API_URL}/api/user`, {
+export async function getSingleUser({ token, email }) {
+	const res = await fetch(`${process.env.API_URL}/api/user?email=${email}`, {
 		headers: { Authorization: `Bearer ${token}` },
 	});
 	const data = await res.json();
@@ -22,6 +22,21 @@ export async function postUser({ formdata }) {
 		method: "POST",
 		body: formdata,
 	});
+	const data = await res.json();
+	console.log(data, "ad");
+	return data;
+}
+
+/** Update User */
+export async function updateUser({ formdata, email, token }) {
+	const res = await fetch(
+		`${process.env.NEXT_PUBLIC_API_URL}/api/user?email=${email}`,
+		{
+			method: "PUT",
+			headers: { Authorization: `Bearer ${token}` },
+			body: formdata,
+		}
+	);
 	const data = await res.json();
 	console.log(data, "ad");
 	return data;

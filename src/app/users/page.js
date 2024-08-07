@@ -21,6 +21,7 @@ import { PlusCircle } from "lucide-react";
 
 // SERVICES //
 import { getAllUsers } from "@/services/Users.service";
+import Link from "next/link";
 
 /** Contact Page */
 export default async function Page() {
@@ -39,12 +40,14 @@ export default async function Page() {
 
 			<main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
 				<div className="flex">
-					<Button size="sm" className="h-8 gap-1">
-						<PlusCircle className="h-3.5 w-3.5" />
-						<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-							Add Users
-						</span>
-					</Button>
+					<Link href="/users/create">
+						<Button size="sm" className="h-8 gap-1">
+							<PlusCircle className="h-3.5 w-3.5" />
+							<span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+								Add Users
+							</span>
+						</Button>
+					</Link>
 				</div>
 				<UsersContainer users={users} />
 			</main>

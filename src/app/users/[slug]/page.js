@@ -7,13 +7,9 @@ import { auth } from "@/auth";
 import SaveBtn from "@/components/SaveBtn";
 
 // SECTIONS //
-import CreateUserForm from "@/sections/users/CreateUserForm";
+import UpdateUserForm from "@/sections/users/UpdateUserForm";
 
 // PLUGINS //
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Save } from "lucide-react";
-import { Input } from "@/components/ui/input";
 
 // STYLES //
 
@@ -27,12 +23,15 @@ import { Input } from "@/components/ui/input";
 import { getSingleUser } from "@/services/Users.service";
 
 /** Contact Page */
-export default async function Page() {
+export default async function Page({ params }) {
 	const session = await auth();
 	if (!session) {
 		redirect("/login");
 	}
-	const data = await getSingleUser({ token: session.user.token });
+	const data = await getSingleUser({
+		token: session.user.token,
+		email: params.slug,
+	});
 
 	return (
 		<div>
@@ -42,7 +41,11 @@ export default async function Page() {
 
 			<main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
 				<SaveBtn />
-				<CreateUserForm data={data} />
+				<UpdateUserForm
+					data={data}
+					email={params.slug}
+					token={session.user.token}
+				/>
 			</main>
 			{/* Page Content ends here */}
 		</div>
