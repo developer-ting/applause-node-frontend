@@ -21,10 +21,10 @@ import { Input } from "@/components/ui/input";
 // DATA //
 
 // SERVICES //
-import { createGenre } from "@/services/Genre.service";
+import { createGenre, updateGenre } from "@/services/Genre.service";
 
 /** Contact Page */
-export default function Page({ token }) {
+export default function Page({ params }) {
 	return (
 		<div>
 			<MetaTags Title={"Contact"} Desc={""} OgImg={""} Url={"/contact"} />
@@ -33,7 +33,7 @@ export default function Page({ token }) {
 
 			<main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
 				<SaveBtn />
-				<Form token={token} />
+				<Form slug={params.slug} />
 			</main>
 			{/* Page Content ends here */}
 		</div>
@@ -41,15 +41,16 @@ export default function Page({ token }) {
 }
 
 /** */
-const Form = ({ token }) => {
+const Form = ({ slug }) => {
 	const router = useRouter();
 	/** */
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const formdata = e.target;
 		const name = formdata.firstname.value;
-		await createGenre({ token: token, name: name });
+		await updateGenre({ slug: slug, name: name });
 		router.push("/genre");
+		router.refresh();
 	};
 	return (
 		<div className="relative flex-col items-start gap-8 md:flex">

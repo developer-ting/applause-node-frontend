@@ -1,3 +1,4 @@
+"use client";
 // MODULES //
 
 // COMPONENTS //
@@ -49,11 +50,12 @@ import {
 
 // IMAGES //
 import ProfileImg from "/public/img/users/profile_pic.png";
+import Link from "next/link";
 
 // DATA //
 
 /** Genre Container */
-export default function GenreContainer() {
+export default function GenreContainer({ data }) {
 	return (
 		<Card>
 			<CardHeader>
@@ -68,39 +70,45 @@ export default function GenreContainer() {
 							{/* <TableHead>Status</TableHead> */}
 							{/* <TableHead className="hidden md:table-cell">Price</TableHead> */}
 							{/* <TableHead className="hidden md:table-cell">Total Sales</TableHead> */}
-							<TableHead className="hidden md:table-cell">Created at</TableHead>
+							{/* <TableHead className="hidden md:table-cell">Created at</TableHead> */}
 							<TableHead>
 								<span className="sr-only">Actions</span>
 							</TableHead>
 						</TableRow>
 					</TableHeader>
 					<TableBody>
-						<TableRow>
-							<TableCell className="font-medium">Dancing</TableCell>
-							{/* <TableCell>
-								<Badge variant="outline">Draft</Badge>
-							</TableCell> */}
-							{/* <TableCell className="hidden md:table-cell">$499.99</TableCell> */}
-							{/* <TableCell className="hidden md:table-cell">25</TableCell> */}
-							<TableCell className="hidden md:table-cell">
-								2023-07-12 10:42 AM
-							</TableCell>
-							<TableCell>
-								<DropdownMenu>
-									<DropdownMenuTrigger asChild>
-										<Button aria-haspopup="true" size="icon" variant="ghost">
-											<MoreHorizontal className="h-4 w-4" />
-											<span className="sr-only">Toggle menu</span>
-										</Button>
-									</DropdownMenuTrigger>
-									<DropdownMenuContent align="end">
-										<DropdownMenuLabel>Actions</DropdownMenuLabel>
-										<DropdownMenuItem>Edit</DropdownMenuItem>
-										<DropdownMenuItem>Delete</DropdownMenuItem>
-									</DropdownMenuContent>
-								</DropdownMenu>
-							</TableCell>
-						</TableRow>
+						{data.map((item, ind) => {
+							return (
+								<TableRow key={ind}>
+									<TableCell className="font-medium">{item.title}</TableCell>
+									{/* <TableCell>
+									<Badge variant="outline">Draft</Badge>
+								</TableCell> */}
+									{/* <TableCell className="hidden md:table-cell">$499.99</TableCell> */}
+									{/* <TableCell className="hidden md:table-cell">25</TableCell> */}
+									{/* <TableCell className="hidden md:table-cell">
+										2023-07-12 10:42 AM
+									</TableCell> */}
+									<TableCell>
+										<DropdownMenu>
+											<DropdownMenuTrigger asChild>
+												<Button aria-haspopup="true" size="icon" variant="ghost">
+													<MoreHorizontal className="h-4 w-4" />
+													<span className="sr-only">Toggle menu</span>
+												</Button>
+											</DropdownMenuTrigger>
+											<DropdownMenuContent align="end">
+												<DropdownMenuLabel>Actions</DropdownMenuLabel>
+												<DropdownMenuItem>
+													<Link href={`/genre/${item.title}`}>Edit</Link>
+												</DropdownMenuItem>
+												<DropdownMenuItem>Delete</DropdownMenuItem>
+											</DropdownMenuContent>
+										</DropdownMenu>
+									</TableCell>
+								</TableRow>
+							);
+						})}
 					</TableBody>
 				</Table>
 			</CardContent>

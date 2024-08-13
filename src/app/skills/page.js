@@ -20,13 +20,16 @@ import { PlusCircle } from "lucide-react";
 
 // DATA //
 
+// SERVICES //
+import { getAllSkill } from "@/services/Skills.service";
+
 /** Contact Page */
 export default async function Page() {
 	const session = await auth();
 	if (!session) {
 		redirect("/login");
 	}
-
+	const data = await getAllSkill({ token: session.user.token });
 	return (
 		<div>
 			<MetaTags Title={"Contact"} Desc={""} OgImg={""} Url={"/contact"} />
@@ -42,7 +45,7 @@ export default async function Page() {
 						</span>
 					</Button>
 				</Link>
-				<SkillsContainer />
+				<SkillsContainer data={data} token={session.user.token} />
 			</main>
 			{/* Page Content ends here */}
 		</div>

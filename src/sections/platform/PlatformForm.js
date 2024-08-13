@@ -4,12 +4,16 @@ import { useRouter } from "next/navigation";
 
 // COMPONENTS //
 import MetaTags from "@/components/MetaTags";
-import SaveBtn from "@/components/SaveBtn";
+import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 
 // SECTIONS //
 
 // PLUGINS //
+import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+
+import { Save } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 // STYLES //
@@ -21,48 +25,41 @@ import { Input } from "@/components/ui/input";
 // DATA //
 
 // SERVICES //
-import { createGenre } from "@/services/Genre.service";
-
-/** Contact Page */
-export default function Page({ token }) {
-	return (
-		<div>
-			<MetaTags Title={"Contact"} Desc={""} OgImg={""} Url={"/contact"} />
-
-			{/* Page Content starts here */}
-
-			<main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-				<SaveBtn />
-				<Form token={token} />
-			</main>
-			{/* Page Content ends here */}
-		</div>
-	);
-}
+import { createPlatform, updatePlatform } from "@/services/Platform.service";
 
 /** */
-const Form = ({ token }) => {
+const PlatformForm = ({ slug, isUpdate }) => {
 	const router = useRouter();
 	/** */
 	const handleSubmit = async (e) => {
+		console.log("asdasd");
 		e.preventDefault();
 		const formdata = e.target;
 		const name = formdata.firstname.value;
-		await createGenre({ token: token, name: name });
-		router.push("/genre");
+		console.log(name);
+		if (!name) return;
+		if (isUpdate) {
+			await updatePlatform({ slug: slug, name: name });
+		} else {
+			await createPlatform({ name: name });
+		}
+		router.push("/platform");
+		router.refresh();
 	};
 	return (
 		<div className="relative flex-col items-start gap-8 md:flex">
 			<form className="form grid w-full items-start gap-6" onSubmit={handleSubmit}>
 				<fieldset className="grid gap-6 rounded-lg border p-4">
-					<legend className="-ml-1 px-1 text-sm font-medium">Genre</legend>
+					<legend className="-ml-1 px-1 text-sm font-medium">Platform</legend>
 
 					<div className="grid gap-3">
 						<Label htmlFor="temperature">Name</Label>
-						<Input name="firstname" id="firstname" type="text" placeholder="First" />
+						<Input id="firstname" type="text" placeholder="First" />
 					</div>
 				</fieldset>
 			</form>
 		</div>
 	);
 };
+
+export default PlatformForm;

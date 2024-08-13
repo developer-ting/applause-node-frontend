@@ -20,12 +20,16 @@ import { PlusCircle } from "lucide-react";
 
 // DATA //
 
+// SERVICES //
+import { getAllPlatform } from "@/services/Platform.service";
+
 /** Contact Page */
 export default async function Page() {
 	const session = await auth();
 	if (!session) {
 		redirect("/login");
 	}
+	const data = await getAllPlatform({ token: session.user.token });
 	return (
 		<div>
 			<MetaTags Title={"Contact"} Desc={""} OgImg={""} Url={"/contact"} />
@@ -41,7 +45,7 @@ export default async function Page() {
 						</span>
 					</Button>
 				</Link>
-				<PlatformContainer />
+				<PlatformContainer data={data} />
 			</main>
 			{/* Page Content ends here */}
 		</div>

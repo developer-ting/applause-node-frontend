@@ -21,8 +21,10 @@ import { Save } from "lucide-react";
 const SaveBtn = () => {
 	/** */
 	function submit() {
-		const submitButton = document.querySelector(".onsubmitBtn");
-		submitButton.click();
+		const form = document.querySelector(".form");
+		const event = new Event("submit", { bubbles: true, cancelable: true });
+		console.log(form, event);
+		form.dispatchEvent(event);
 	}
 
 	return (
