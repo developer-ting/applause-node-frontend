@@ -24,7 +24,7 @@ import { Input } from "@/components/ui/input";
 import { createGenre } from "@/services/Genre.service";
 
 /** Contact Page */
-export default function Page({ token }) {
+export default function Page() {
 	return (
 		<div>
 			<MetaTags Title={"Contact"} Desc={""} OgImg={""} Url={"/contact"} />
@@ -33,7 +33,8 @@ export default function Page({ token }) {
 
 			<main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
 				<SaveBtn />
-				<Form token={token} />
+				{/* <Form token={token} /> */}
+				<Form />
 			</main>
 			{/* Page Content ends here */}
 		</div>
